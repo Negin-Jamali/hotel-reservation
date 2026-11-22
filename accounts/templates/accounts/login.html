@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+
+{% block title %}ورود به سامانه{% endblock %}
+
+{% block content %}
+
+    <h2>ورود به سامانه رزرو هتل</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">ورود</button>
+    </form>
+
+    <p>
+        حساب کاربری ندارید؟
+        <a href="{% url 'accounts:register' %}">ثبت‌نام کنید</a>
+    </p>
+
+{% endblock %}

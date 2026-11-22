@@ -1,0 +1,18 @@
+
+{% extends 'base.html' %}
+
+{% block title %}ثبت رزرو اتاق{% endblock %}
+
+{% block content %}
+
+    <h2>ثبت رزرو اتاق هتل</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">ثبت رزرو</button>
+    </form>
+
+{% endblock %}

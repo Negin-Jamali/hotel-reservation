@@ -1,0 +1,29 @@
+
+{% extends 'base.html' %}
+
+{% block title %}لیست هتل‌ها{% endblock %}
+
+{% block content %}
+    <h2>جست‌وجوی هتل</h2>
+
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit">جست‌وجو</button>
+    </form>
+
+    <hr>
+
+    <h2>لیست هتل‌ها</h2>
+
+    {% for hotel in hotels %}
+        <div>
+            <h3>{{ hotel.name }}</h3>
+            <p>شهر: {{ hotel.city }}</p>
+            <p>ستاره: {{ hotel.star_rating }}</p>
+            <p>آدرس: {{ hotel.address }}</p>
+        </div>
+        <hr>
+    {% empty %}
+        <p>هیچ هتلی ثبت نشده است.</p>
+    {% endfor %}
+{% endblock %}
