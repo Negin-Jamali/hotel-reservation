@@ -1,10 +1,11 @@
 
 {% extends 'base.html' %}
 
-{% block title %}لیست هتل‌ها{% endblock %}
+{% block title %}جست‌وجوی اتاق{% endblock %}
 
 {% block content %}
-    <h2>جست‌وجوی هتل</h2>
+
+    <h2>جست‌وجوی اتاق</h2>
 
     <form method="get">
         {{ form.as_p }}
@@ -13,17 +14,29 @@
 
     <hr>
 
-    <h2>لیست هتل‌ها</h2>
+    {% if request.GET %}
+        <h2>نتایج جست‌وجو</h2>
 
-    {% for hotel in hotels %}
-        <div>
-            <h3>{{ hotel.name }}</h3>
-            <p>شهر: {{ hotel.city }}</p>
-            <p>ستاره: {{ hotel.star_rating }}</p>
-            <p>آدرس: {{ hotel.address }}</p>
-        </div>
-        <hr>
-    {% empty %}
-        <p>هیچ هتلی ثبت نشده است.</p>
-    {% endfor %}
+        {% for item in available_room_types %}
+            <div>
+                <h3>
+                    <a href="{% url 'hotels:hotel_detail' item.room_type.hotel.id %}">
+                    {{ item.room_type.hotel.name }}
+                    </a>
+                </h3>
+
+                <p>شهر: {{ item.room_type.hotel.city }}</p>
+                <p>نوع اتاق: {{ item.room_type.title }}</p>
+                <p>ظرفیت: {{ item.room_type.capacity }} نفر</p>
+                <p>قیمت هر شب: {{ item.room_type.price_per_night }} تومان</p>
+                <p>تعداد اتاق موجود: {{ item.available_count }}</p>
+
+            </div>
+            <hr>
+        {% empty %}
+            <p>اتاقی با شرایط جست‌وجوی شما پیدا نشد.</p>
+        {% endfor %}
+
+    {% endif %}
+
 {% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}وضعیت اتاق‌ها{% endblock %}
+
+{% block content %}
+
+<h2>وضعیت اتاق‌های هتل‌های من</h2>
+
+{% for item in room_status_list %}
+
+    <hr>
+
+    <p>هتل: {{ item.room_type.hotel.name }}</p>
+    <p>نوع اتاق: {{ item.room_type.title }}</p>
+    <p>تعداد کل اتاق‌ها: {{ item.room_type.total_rooms }}</p>
+    <p>تعداد اتاق‌های رزروشده: {{ item.reserved_count }}</p>
+    <p>تعداد اتاق‌های آزاد: {{ item.available_count }}</p>
+
+{% empty %}
+
+    <p>هنوز نوع اتاقی ثبت نکرده‌اید.</p>
+
+{% endfor %}
+
+{% endblock %}

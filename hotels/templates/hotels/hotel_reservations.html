@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}رزروهای هتل{% endblock %}
+
+{% block content %}
+
+    <h2>رزروهای هتل‌های من</h2>
+
+    {% for reservation in reservations %}
+        <hr>
+
+        <p>مشتری: {{ reservation.customer.username }}</p>
+        <p>هتل: {{ reservation.room_type.hotel.name }}</p>
+        <p>نوع اتاق: {{ reservation.room_type.title }}</p>
+        <p>تاریخ ورود: {{ reservation.check_in }}</p>
+        <p>تاریخ خروج: {{ reservation.check_out }}</p>
+        <p>وضعیت: {{ reservation.get_status_display }}</p>
+
+    {% empty %}
+        <p>هنوز رزروی ثبت نشده است.</p>
+    {% endfor %}
+
+{% endblock %}

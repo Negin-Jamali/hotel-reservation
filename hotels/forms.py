@@ -1,5 +1,5 @@
-
 from django import forms
+from .models import Hotel, RoomType
 
 
 class HotelSearchForm(forms.Form):
@@ -25,3 +25,43 @@ class HotelSearchForm(forms.Form):
         min_value=1,
         initial=1
     )
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        check_in = cleaned_data.get('check_in')
+        check_out = cleaned_data.get('check_out')
+
+        if check_in and check_out and check_out <= check_in:
+            raise forms.ValidationError(
+                'تاریخ خروج باید بعد از تاریخ ورود باشد.'
+            )
+
+        return cleaned_data
+
+
+class HotelForm(forms.ModelForm):
+    class Meta:
+        model = Hotel
+        fields = [
+            'name',
+            'city',
+            'address',
+            'description',
+            'star_rating',
+            'latitude',
+            'longitude',
+        ]
+
+
+class RoomTypeForm(forms.ModelForm):
+    class Meta:
+        model = RoomType
+        fields = [
+            'title',
+            'capacity',
+            'price_per_night',
+            'total_rooms',
+            'amenities',
+            'description',
+        ]

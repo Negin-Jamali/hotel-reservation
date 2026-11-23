@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}ثبت هتل جدید{% endblock %}
+
+{% block content %}
+    <h2>ثبت هتل جدید</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">ثبت هتل</button>
+    </form>
+{% endblock %}

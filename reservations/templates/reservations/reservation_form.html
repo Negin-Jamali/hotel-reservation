@@ -15,4 +15,28 @@
         <button type="submit">ثبت رزرو</button>
     </form>
 
+    {% if success_reservation %}
+        <h3>رزرو شما با موفقیت ثبت شد.</h3>
+
+        <p>
+            هتل: {{ success_reservation.room_type.hotel.name }}
+        </p>
+
+        <p>
+            نوع اتاق: {{ success_reservation.room_type.title }}
+        </p>
+
+        <p>
+            تاریخ ورود: {{ success_reservation.check_in }}
+        </p>
+
+        <p>
+            تاریخ خروج: {{ success_reservation.check_out }}
+        </p>
+
+        <p>
+            مبلغ نهایی: {{ success_reservation.total_price }} تومان
+        </p>
+    {% endif %}
+
 {% endblock %}

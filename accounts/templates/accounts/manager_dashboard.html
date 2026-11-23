@@ -1,0 +1,50 @@
+
+{% extends 'base.html' %}
+
+{% block title %}پنل مدیر هتل{% endblock %}
+
+{% block content %}
+
+    <h2>پنل مدیریت هتل</h2>
+
+    <p>به پنل مدیریت هتل خوش آمدید.</p>
+
+    <h3>امکانات مدیریت</h3>
+
+    <ul>
+        <li>
+            <a href="{% url 'hotels:hotel_create' %}">
+                ثبت هتل جدید
+            </a>
+        </li>
+
+        {% for hotel in request.user.hotels.all %}
+            <li>
+                <strong>{{ hotel.name }}</strong>
+
+                <a href="{% url 'hotels:room_type_create' hotel.id %}">
+                    ثبت نوع اتاق برای این هتل
+                </a>
+
+                <a href="{% url 'reservations:discount_code_create' hotel.id %}">
+                    ثبت کد تخفیف برای این هتل
+                </a>
+            </li>
+        {% empty %}
+            <li>هنوز هتلی ثبت نکرده‌اید.</li>
+        {% endfor %}
+
+        <li>
+            <a href="{% url 'hotels:hotel_reservations' %}">
+                مشاهده رزروهای انجام‌شده
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'hotels:room_status' %}">
+                مشاهده اتاق‌های رزروشده و آزاد
+            </a>
+        </li>
+    </ul>
+
+{% endblock %}

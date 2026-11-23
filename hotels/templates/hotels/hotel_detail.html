@@ -1,0 +1,39 @@
+
+{% extends 'base.html' %}
+
+{% block title %}جزئیات هتل{% endblock %}
+
+{% block content %}
+
+    <h2>{{ hotel.name }}</h2>
+
+    <p>شهر: {{ hotel.city }}</p>
+    <p>آدرس: {{ hotel.address }}</p>
+    <p>تعداد ستاره: {{ hotel.star_rating }}</p>
+    <p>توضیحات: {{ hotel.description }}</p>
+
+    <hr>
+
+    <h3>انواع اتاق‌های این هتل</h3>
+
+    {% for room in room_types %}
+        <div>
+            <h4>{{ room.title }}</h4>
+            <p>ظرفیت: {{ room.capacity }} نفر</p>
+            <p>قیمت هر شب: {{ room.price_per_night }} تومان</p>
+            <p>تعداد اتاق: {{ room.total_rooms }}</p>
+            <p>امکانات: {{ room.amenities }}</p>
+            <p>توضیحات: {{ room.description }}</p>
+        </div>
+        <hr>
+    {% empty %}
+        <p>هنوز اتاقی برای این هتل ثبت نشده است.</p>
+    {% endfor %}
+
+    <a href="{% url 'hotels:hotel_list' %}">بازگشت به جست‌وجو</a>
+    <p>
+        <a href="{% url 'reservations:reservation_create' %}">
+            رفتن به صفحه رزرو
+        </a>
+    </p>
+{% endblock %}
